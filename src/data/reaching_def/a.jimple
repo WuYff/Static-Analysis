@@ -1,0 +1,36 @@
+public class a extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        a this;
+
+        this := @this: a;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static int test(int, int)
+    {
+        java.io.PrintStream $stack3;
+        int x, xx, z#3, xx#4;
+
+        xx := @parameter0: int;
+
+        x := @parameter1: int;
+
+        z#3 = xx + 1;
+
+        $stack3 = <java.lang.System: java.io.PrintStream out>;
+
+        virtualinvoke $stack3.<java.io.PrintStream: void println(int)>(z#3);
+
+        xx#4 = x + xx;
+
+        z#3 = xx#4 + 1;
+
+        return z#3;
+    }
+}
