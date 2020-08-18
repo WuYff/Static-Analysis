@@ -2,17 +2,23 @@ import soot.Local;
 import soot.Unit;
 import soot.ValueBox;
 import soot.toolkits.graph.UnitGraph;
+import soot.toolkits.scalar.FlowAnalysis;
 
 import java.util.*;
 
-public interface StaticAnalysis {
+class StaticAnalysisRecorder {
+  UnitGraph graph;
+  public StaticAnalysisRecorder(UnitGraph graph){
+    this.graph=graph;
+    }
+
   Map<Unit, Integer> node_num = new HashMap<Unit, Integer>();
   Map<Integer, List<Integer>> node_child =  new HashMap<Integer, List<Integer>>();
   Map<String,Integer> variable_name_to_int = new HashMap<String, Integer>();
   Map<Integer, Integer> node_variable_def =  new HashMap<Integer, Integer>();
   Map<Integer, List<Integer>> node_variable_use =  new HashMap<Integer, List<Integer>>();
 
-   default void get_node_num(UnitGraph graph){
+   public  void get_node_num(){
     Iterator<Unit> unitIt = graph.iterator();
     int node_i=1;
     while (unitIt.hasNext()) {
@@ -24,7 +30,7 @@ public interface StaticAnalysis {
     }
   }
 
-  default void get_adjmatrix(UnitGraph graph){
+  public void get_adjmatrix(){
     Iterator<Unit> unitIt = graph.iterator();
     while (unitIt.hasNext()) {
       Unit node = unitIt.next();
@@ -38,7 +44,7 @@ public interface StaticAnalysis {
     }
   }
 
-    default void get_node_variable_def(UnitGraph graph) throws Exception {
+    public void get_node_variable_def() throws Exception {
 
     Iterator<Unit> unitIt = graph.iterator();
     int varible_i =1;
@@ -66,8 +72,7 @@ public interface StaticAnalysis {
 
 
 
-  default void get_node_variable_use(UnitGraph graph) throws Exception {
-    Map<Integer, List<Integer>> node_variable_use = new HashMap<Integer, List<Integer>>();
+  public void get_node_variable_use() throws Exception {
     Iterator<Unit> unitIt = graph.iterator();
     while (unitIt.hasNext()) {
       Unit node = unitIt.next();

@@ -3,11 +3,7 @@
 import soot.Local;
 import soot.Unit;
 import soot.Value;
-import soot.ValueBox;
-import soot.jimple.AssignStmt;
-import soot.jimple.BinopExpr;
 import soot.jimple.DefinitionStmt;
-import soot.jimple.Stmt;
 import soot.toolkits.graph.DirectedGraph;
 import soot.toolkits.graph.UnitGraph;
 import soot.toolkits.scalar.ArraySparseSet;
@@ -20,14 +16,10 @@ class ReachingDefAnalysis
     extends ForwardFlowAnalysis<Unit, FlowSet<Unit>>
 {
 
-  public Map<Unit, Integer> node_num = new HashMap<Unit, Integer>();
-  public Map<Integer, Unit> num_node = new HashMap<Integer, Unit>();
-  public Map<String,Integer> variable_name_to_int = new HashMap<String, Integer>();
-  public Map<Integer, Integer> node_variable_def =  new HashMap<Integer, Integer>();
-  public Map<Integer, List<Integer>> node_child =  new HashMap<Integer, List<Integer>>();
-  public List<Integer> entry = new ArrayList<Integer>(); //会有多个entry 吗？
+
   private FlowSet<Unit> emptySet;
   public UnitGraph graph;
+  StaticAnalysisRecorder staticAnalysisRecorder;
 
 
   public ReachingDefAnalysis(DirectedGraph g) throws Exception {
@@ -36,11 +28,12 @@ class ReachingDefAnalysis
     // Create the emptyset
     emptySet = new ArraySparseSet<Unit>();
     graph =(UnitGraph) g;
-    doAnalysis();
-    get_node_num();
-    get_adjmatrix();
-    get_node_variable_def();
+    staticAnalysisRecorder = new StaticAnalysisRecorder(graph);
+    staticAnalysisRecorder.get_node_num();
+    staticAnalysisRecorder.get_adjmatrix();
+    staticAnalysisRecorder.get_node_variable_def();
 
+    doAnalysis();
 
   }
 
@@ -87,8 +80,6 @@ class ReachingDefAnalysis
     /*
      * If this path will not be taken return no path straightaway
      */
-    System.out.println("Unit : "+node);
-    System.out.println("S : "+node.toString());
     FlowSet<Unit> genSet = emptySet.clone();
     Set<Unit>the_gen_set = new HashSet<Unit>();
     if (node instanceof DefinitionStmt) {
@@ -115,7 +106,6 @@ class ReachingDefAnalysis
     // left i.e. previous definitions
     for (Iterator<Unit> listIt = in.iterator(); listIt.hasNext();) {
         Unit u =  listIt.next();
-
         if( u instanceof DefinitionStmt){
         DefinitionStmt tempStmt = (DefinitionStmt) u;
         Value leftOp = tempStmt.getLeftOp();
@@ -137,53 +127,5 @@ class ReachingDefAnalysis
   }
 
 
-  public  void get_node_num(){
-    Iterator<Unit> unitIt = this.graph.iterator();
-    int node_i=1;
-    while (unitIt.hasNext()) {
-      Unit node = unitIt.next();
-      if (!node_num.containsKey(node)) {
-        node_num.put(node, node_i);
-        num_node.put(node_i,node);
-      }
-      node_i++;
-    }
-  }
-
-
-  public  void get_node_variable_def() throws Exception {
-    Iterator<Unit> unitIt = this.graph.iterator();
-    int variable_i =1;
-    while (unitIt.hasNext()) {
-      Unit node = unitIt.next();
-      List<ValueBox> l =node.getDefBoxes();
-      if(l.size()>1)  throw new Exception("Method get_variable_int : def size > 1");
-      for (ValueBox def: node.getDefBoxes()) {
-        if (def.getValue() instanceof Local) {
-          String name = ((Local) def.getValue()).getName();
-          if(!variable_name_to_int.containsKey(name)){
-            variable_name_to_int.put(name,variable_i); // 我们只关心left
-            node_variable_def.put(node_num.get(node),variable_i);
-            variable_i++;
-          } else{
-            node_variable_def.put(node_num.get(node),variable_name_to_int.get(name));
-          }
-        }
-      }
-    }
-  }
-
-  public  void get_adjmatrix(){
-    Iterator<Unit> unitIt = this.graph.iterator();
-    while (unitIt.hasNext()) {
-      Unit node = unitIt.next();
-      List<Unit> successors =this.graph.getSuccsOf(node); //会不会有自环呢
-      List<Integer> successors_int = new ArrayList<Integer>();
-      for(Unit child : successors){
-        successors_int.add(node_num.get(child));
-      }
-      node_child.put(node_num.get(node), successors_int);
-    }
-  }
 }
 
