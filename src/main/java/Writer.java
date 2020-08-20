@@ -17,12 +17,12 @@ public class Writer {
   FlowAnalysis analysis;
   StaticAnalysisRecorder analysisRecorder;
   String prefix;
-  public Writer(FlowAnalysis analysis, StaticAnalysisRecorder analysisRecorder,String prefix){
-    this.analysisRecorder= analysisRecorder;
-    this.prefix = prefix;
-    this.analysis=analysis;
-  }
 
+  public Writer(FlowAnalysis analysis, StaticAnalysisRecorder analysisRecorder, String prefix) {
+    this.analysisRecorder = analysisRecorder;
+    this.prefix = prefix;
+    this.analysis = analysis;
+  }
 
   /**
    * Generates _graph.txt files
@@ -34,12 +34,12 @@ public class Writer {
    *    src2 trg1 trg2
    */
   public void write_graph() throws IOException {
-    BufferedWriter out = new BufferedWriter(new FileWriter(prefix+ "_graph" + ".txt"));
-    StringBuilder w ;
-    for(Integer k: analysisRecorder.node_successor.keySet()){
+    BufferedWriter out = new BufferedWriter(new FileWriter(prefix + "_graph" + ".txt"));
+    StringBuilder w;
+    for (Integer k : analysisRecorder.node_successor.keySet()) {
       w = new StringBuilder(k + " ");
       List<Integer> child = analysisRecorder.node_successor.get(k);
-      for(Integer i: child){
+      for (Integer i : child) {
         w.append(i).append(" ");
       }
       w.append("\n");
@@ -49,8 +49,8 @@ public class Writer {
   }
 
   @Deprecated
-  public void write_target_reaching_definition( DirectedGraph graph  ) throws IOException {
-    BufferedWriter out = new BufferedWriter(new FileWriter(prefix+"_target"+ ".txt"));
+  public void write_target_reaching_definition(DirectedGraph graph) throws IOException {
+    BufferedWriter out = new BufferedWriter(new FileWriter(prefix + "_target" + ".txt"));
     for (Unit s : (Iterable<Unit>) graph) {
       FlowSet<Unit> set = (FlowSet<Unit>) analysis.getFlowAfter(s);
       StringBuilder rs = new StringBuilder();
@@ -71,8 +71,8 @@ public class Writer {
    * then write as:
    *    C A B
    */
-  public void write_target_reaching_definition_only_def_node( DirectedGraph graph  ) throws IOException {
-    BufferedWriter out = new BufferedWriter(new FileWriter(prefix+"_target"+ ".txt"));
+  public void write_target_reaching_definition_only_def_node(DirectedGraph graph) throws IOException {
+    BufferedWriter out = new BufferedWriter(new FileWriter(prefix + "_target" + ".txt"));
     for (Unit s : (Iterable<Unit>) graph) {
       FlowSet<Unit> set = (FlowSet<Unit>) analysis.getFlowAfter(s);
       StringBuilder rs = new StringBuilder();
@@ -93,11 +93,12 @@ public class Writer {
    * then write as:
    *    C x y
    */
-  public void write_target_live_variable( DirectedGraph graph  ) throws IOException {
-    BufferedWriter out = new BufferedWriter(new FileWriter(prefix+"_target"+ ".txt"));
+  public void write_target_live_variable(DirectedGraph graph) throws IOException {
+    BufferedWriter out = new BufferedWriter(new FileWriter(prefix + "_target" + ".txt"));
 
     for (Unit s : (Iterable<Unit>) graph) {
-      FlowSet<Local> set = (FlowSet<Local>) analysis.getFlowBefore(s); // The flow set here is for the non-reverse graph, equals OutSet
+      FlowSet<Local> set = (FlowSet<Local>) analysis.getFlowBefore(s); // The flow set here is for the non-reverse graph, equals
+                                                                       // OutSet
       int node_num = analysisRecorder.node_num.get(s);
       StringBuilder rs = new StringBuilder();
       rs.append(node_num);
@@ -118,10 +119,10 @@ public class Writer {
    *   A b
    *   B c
    */
-  public  void write_node_def( ) throws IOException {
-    BufferedWriter out = new BufferedWriter(new FileWriter(prefix+"_node_def"+ ".txt"));
-    StringBuilder w ;
-    for(Integer key:  analysisRecorder.node_variable_def.keySet()){
+  public void write_node_def() throws IOException {
+    BufferedWriter out = new BufferedWriter(new FileWriter(prefix + "_node_def" + ".txt"));
+    StringBuilder w;
+    for (Integer key : analysisRecorder.node_variable_def.keySet()) {
       w = new StringBuilder(key + " ");
       Integer v = analysisRecorder.node_variable_def.get(key);
       w.append(v).append(" ");
@@ -139,12 +140,12 @@ public class Writer {
    *   A b d
    *   B b
    */
-  public void write_node_use( ) throws IOException {
-    BufferedWriter out = new BufferedWriter(new FileWriter(prefix+"_node_use"+ ".txt"));
-    for (Integer key : analysisRecorder. node_variable_use.keySet()){
+  public void write_node_use() throws IOException {
+    BufferedWriter out = new BufferedWriter(new FileWriter(prefix + "_node_use" + ".txt"));
+    for (Integer key : analysisRecorder.node_variable_use.keySet()) {
       StringBuilder hh = new StringBuilder();
       hh.append(key);
-      for (Integer i : analysisRecorder. node_variable_use.get(key)){
+      for (Integer i : analysisRecorder.node_variable_use.get(key)) {
         hh.append(" ").append(i);
       }
       hh.append(" \n");
