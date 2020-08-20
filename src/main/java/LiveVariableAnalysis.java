@@ -22,7 +22,7 @@ class LiveVariableAnalysis
 		emptySet = new ArraySparseSet<Local>();
 		staticAnalysisRecorder = new StaticAnalysisRecorder(graph);
 		staticAnalysisRecorder.get_node_num();
-		staticAnalysisRecorder.get_adjmatrix();
+		staticAnalysisRecorder.get_node_successor();
 		staticAnalysisRecorder.get_node_variable_def();
 		staticAnalysisRecorder.get_node_variable_use();
 		doAnalysis();

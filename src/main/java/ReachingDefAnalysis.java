@@ -30,9 +30,9 @@ class ReachingDefAnalysis
     graph =(UnitGraph) g;
     staticAnalysisRecorder = new StaticAnalysisRecorder(graph);
     staticAnalysisRecorder.get_node_num();
-    staticAnalysisRecorder.get_adjmatrix();
+    staticAnalysisRecorder.get_def_node_num();
+    staticAnalysisRecorder.get_node_successor();
     staticAnalysisRecorder.get_node_variable_def();
-
     doAnalysis();
 
   }
