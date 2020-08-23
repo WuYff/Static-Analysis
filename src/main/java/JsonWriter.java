@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 
 /**
  * Generates a .jsonl file as the dataset. Writes the static analysis results and information about the program.
@@ -30,15 +31,15 @@ public class JsonWriter {
 
   public void write() throws IOException {
     JSONObject jsonObject = new JSONObject();
-    jsonObject.put("graph", analysisRecorder.node_successor);
-    jsonObject.put("node_def", analysisRecorder.node_variable_def);
+    jsonObject.put("graph", JSON.toJSONString(analysisRecorder.node_successor));
+    jsonObject.put("node_def", JSON.toJSONString(analysisRecorder.node_variable_def));
     jsonObject.put("max_node_id_of_one_graph", get_max_node_id_of_one_graph());
     jsonObject.put("max_def_id_of_one_graph", get_max_def_id_one_graph());
     if (this.analysis instanceof ReachingDefAnalysis) {
-      jsonObject.put("target", get_target_reaching_definition_only_def_node(graph));
+      jsonObject.put("target", JSON.toJSONString(get_target_reaching_definition_only_def_node(graph)));
     } else if (this.analysis instanceof LiveVariableAnalysis) {
-      jsonObject.put("target", get_target_live_variable(graph));
-      jsonObject.put("node_use", analysisRecorder.node_variable_use);
+      jsonObject.put("target", JSON.toJSONString(get_target_live_variable(graph)));
+      jsonObject.put("node_use", JSON.toJSONString(analysisRecorder.node_variable_use));
     }
 
     try (FileWriter fw = new FileWriter(filePath, true);
