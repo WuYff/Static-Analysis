@@ -51,10 +51,14 @@ class StaticAnalysisRecorder {
     int def_node_id = 1;
     while (unitIt.hasNext()) {
       Unit node = unitIt.next();
+      if (def_node_num.containsKey(node)){
+        System.out.println("WRONG");
+      }
       if ((node instanceof DefinitionStmt) && !def_node_num.containsKey(node)) {
         def_node_num.put(node, def_node_id);
         def_node_id++;
       }
+
 
     }
   }

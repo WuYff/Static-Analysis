@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+@Deprecated
 /**
  * Generates .txt files as the dataset. Writes the static analysis results
  * and information about the program (e.g. CFG) to corresponding .txt files.

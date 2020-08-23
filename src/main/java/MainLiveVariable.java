@@ -7,8 +7,6 @@ import java.util.*;
  * Perform live variable analysis and generate the dataset.
  */
 public class MainLiveVariable {
-  private static int file_num = 0;
-
   public static void main(String[] args) {
     // The root directory that contains all the .class files you want to process
     String classPath = "/Users/yiwu/Documents/Senior/UCInspire/dataset/jfreechart/target/classes";
@@ -26,7 +24,7 @@ public class MainLiveVariable {
     };
 
     System.out.println("Start liveness analysis.");
-
+    String filePath = "/Users/yiwu/Documents/Senior/SE/soot/src/data/live_variable_data.jsonl";
     PackManager.v().getPack("jtp").add(
                                        new Transform("jtp.myTransform", new BodyTransformer() {
                                          protected void internalTransform(Body body, String phase, Map options) {
@@ -35,12 +33,9 @@ public class MainLiveVariable {
                                              LiveVariableAnalysis analysis = new LiveVariableAnalysis(g);
                                              // Skip simple graphs whose node number <= 3
                                              if (analysis.staticAnalysisRecorder.node_num.size() > 3) {
-                                               Writer writer = new Writer(analysis, analysis.staticAnalysisRecorder,
-                                                                          output + "l" + file_num++);
-                                               writer.write_graph();
-                                               writer.write_target_live_variable(g);
-                                               writer.write_node_def();
-                                               writer.write_node_use();
+                                               JsonWriter jsonWriter = new JsonWriter(analysis, analysis.staticAnalysisRecorder,
+                                                                                      g, filePath);
+                                               jsonWriter.write();
                                              }
                                            } catch (Exception e) {
                                              e.printStackTrace();
@@ -49,6 +44,5 @@ public class MainLiveVariable {
                                          }
                                        }));
     soot.Main.main(sootArgs);
-    System.out.println("Create " + file_num + " graph in total.");
   }
 }
