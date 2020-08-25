@@ -33,7 +33,7 @@ public class MainReachingDef {
                                            try {
                                              ReachingDefAnalysis analysis = new ReachingDefAnalysis(new BriefUnitGraph(body));
                                              // Skip simple graphs whose node number <= 3
-                                             if (analysis.staticAnalysisRecorder.node_num.size() > 3) { // skip simple graph
+                                             if ( analysis.staticAnalysisRecorder.node_num.size() > 3 ) { // skip simple graph
                                                JsonWriter jsonWriter = new JsonWriter(analysis, analysis.staticAnalysisRecorder,
                                                                                       g, filePath);
                                                jsonWriter.write();

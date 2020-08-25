@@ -92,10 +92,11 @@ public class JsonWriter {
 
   public int get_max_def_id_one_graph() {
     int max_def_id_of_one_graph = -1;
-    for (int key : analysisRecorder.node_variable_def.keySet()) {
-      int def = analysisRecorder.node_variable_def.get(key);
+    for (Unit key : analysisRecorder.def_node_num.keySet()) {
+      int def = analysisRecorder.def_node_num.get(key);
       if (def > max_def_id_of_one_graph) max_def_id_of_one_graph = def;
     }
+    assert analysisRecorder.node_variable_def.size() == max_def_id_of_one_graph;
     return max_def_id_of_one_graph;
   }
 }
