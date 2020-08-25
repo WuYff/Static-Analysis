@@ -5,3 +5,4 @@ String classPath = "/Users/yiwu/Documents/Senior/UCInspire/dataset/jsoup/target/
 String classPath ="/Users/yiwu/Documents/Senior/UCInspire/dataset/jackson-core/target/classes";
 String classPath = "/Users/yiwu/Documents/Senior/UCInspire/dataset/jfreechart/target/classes";
 String classPath = ".:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/rt.jar";
+String classPath ="/Users/yiwu/Documents/Senior/UCInspire/dataset/Leetcode/build/classes/java/main";

@@ -11,3 +11,12 @@
 
 - Run [MainLiveVariable.java](https://github.com/WuYff/Static-Analysis/blob/master/src/main/java/MainLiveVariable.java)
 - Referrence: See live variable analysis in this [slide](https://pascal-group.bitbucket.io/lectures/static-program-analysis-3-4.pdf#page=137) from p137 to p228
+
+## Open-source Java Project
+Use the following java project to generate data:
+- [jfreechart](https://github.com/apache/commons-compress.git)
+- [jsoup](https://github.com/jhy/jsoup)
+- [jackson-core](https://github.com/FasterXML/jackson-core)
+- [commons-lang](https://github.com/jhy/jsoup)
+- [Leetcode](https://github.com/fishercoder1534/Leetcode)
+

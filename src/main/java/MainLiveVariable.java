@@ -8,8 +8,12 @@ import java.util.*;
  */
 public class MainLiveVariable {
   public static void main(String[] args) {
+    int number_of_node_upper_bound = 60; // the max number of node for all graphs
+    int number_of_node_lower_bound = 3; // the min number of node for all graphs
     // The root directory that contains all the .class files you want to process
     String classPath = "/Users/yiwu/Documents/Senior/UCInspire/dataset/jfreechart/target/classes";
+    // .json file path
+    String filePath = "/Users/yiwu/Documents/Senior/SE/soot/src/data/4.jsonl";
     // The output directory (end with "/")
     String output = "/Users/yiwu/Documents/Senior/SE/soot/src/data/liveness/";
     String[] sootArgs = {
@@ -24,7 +28,6 @@ public class MainLiveVariable {
     };
 
     System.out.println("Start liveness analysis.");
-    String filePath = "/Users/yiwu/Documents/Senior/SE/soot/src/data/live_variable_data.jsonl";
     PackManager.v().getPack("jtp").add(
                                        new Transform("jtp.myTransform", new BodyTransformer() {
                                          protected void internalTransform(Body body, String phase, Map options) {
@@ -32,7 +35,8 @@ public class MainLiveVariable {
                                            try {
                                              LiveVariableAnalysis analysis = new LiveVariableAnalysis(g);
                                              // Skip simple graphs whose node number <= 3
-                                             if (analysis.staticAnalysisRecorder.node_num.size() > 3) {
+                                             if ( analysis.staticAnalysisRecorder.node_num.size() > number_of_node_lower_bound
+                                                  && analysis.staticAnalysisRecorder.node_num.size() < number_of_node_upper_bound )  {
                                                JsonWriter jsonWriter = new JsonWriter(analysis, analysis.staticAnalysisRecorder,
                                                                                       g, filePath);
                                                jsonWriter.write();
