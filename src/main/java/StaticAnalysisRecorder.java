@@ -55,12 +55,14 @@ class StaticAnalysisRecorder {
         System.out.println("WRONG");
       }
       if ((node instanceof DefinitionStmt) && !def_node_num.containsKey(node)) {
-        def_node_num.put(node, def_node_id);
-        def_node_id++;
+        for (ValueBox def : node.getDefBoxes()) {
+          if (def.getValue() instanceof Local) {
+            def_node_num.put(node, def_node_id);
+            def_node_id++;
+          }
       }
-
-
     }
+  }
   }
 
   /**
