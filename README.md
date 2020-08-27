@@ -1,6 +1,8 @@
 # Static Analysis
 - This repo is for generating dataset for GNN. Data flow analysis using Soot.
 - Output: A .jsonl file for each kind of analysis
+    - [reaching_def_data.jsonl](https://github.com/WuYff/Gated-Graph-Nerual-Network/blob/master/dataset/reaching_def_data.jsonl) 
+    - [live_variable_data.jsonl](https://github.com/WuYff/Gated-Graph-Nerual-Network/blob/master/dataset/live_variable_data.jsonl) 
 
 ## Reaching Definition Analysis
 
@@ -19,4 +21,6 @@ Use the following java project to generate data:
 - [jackson-core](https://github.com/FasterXML/jackson-core)
 - [commons-lang](https://github.com/jhy/jsoup)
 - [Leetcode](https://github.com/fishercoder1534/Leetcode)
+- [Algorithms](https://github.com/williamfiset/Algorithms)
+
 
