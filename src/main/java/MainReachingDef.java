@@ -8,12 +8,12 @@ import java.util.*;
  */
 public class MainReachingDef {
   public static void main(String[] args) {
-    int number_of_node_upper_bound = 60; // the max number of node for all graphs
-    int number_of_node_lower_bound = 3; // the min number of node for all graphs
+    int number_of_node_upper_bound = 60; // the max number of node for each graph
+    int number_of_node_lower_bound = 3; // the min number of node for each graph
     // The root directory that contains all the .class files you want to process
-    String classPath ="/Users/yiwu/Documents/Senior/UCInspire/dataset/Leetcode/build/classes/java/main";
-    // .json file path
-    String filePath = "/Users/yiwu/Documents/Senior/SE/soot/src/data/4.jsonl";
+    String classPath ="/Users/yiwu/Documents/Senior/UCInspire/dataset/jfreechart/target/classes";
+    // The path of .json file to store the generated dataset
+    String filePath = "/Users/yiwu/Documents/Senior/SE/soot/src/data/reaching_def_data.jsonl";
     // The output directory (end with "/") for jimple file
     String output = "/Users/yiwu/Documents/Senior/SE/soot/src/data/reaching/";
 
