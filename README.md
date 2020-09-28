@@ -14,8 +14,9 @@
 - Run [MainLiveVariable.java](https://github.com/WuYff/Static-Analysis/blob/master/src/main/java/MainLiveVariable.java)
 - Referrence: See live variable analysis in this [slide](https://pascal-group.bitbucket.io/lectures/static-program-analysis-3-4.pdf#page=137) from p137 to p228
 
+
 ## Open-source Java Project
-Use the following java project to generate data:
+I used the following java project to generate data:
 - [jfreechart](https://github.com/apache/commons-compress.git)
 - [jsoup](https://github.com/jhy/jsoup)
 - [jackson-core](https://github.com/FasterXML/jackson-core)
@@ -23,4 +24,6 @@ Use the following java project to generate data:
 - [Leetcode](https://github.com/fishercoder1534/Leetcode)
 - [Algorithms](https://github.com/williamfiset/Algorithms)
 
+## Issue of Soot
+- It would be better to collect more data but could meet this [issue](https://github.com/soot-oss/soot/issues/505) of soot for some code repo.
 
