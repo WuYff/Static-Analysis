@@ -16,7 +16,6 @@
 - Referrence: See live variable analysis in this [slide](https://pascal-group.bitbucket.io/lectures/static-program-analysis-3-4.pdf#page=137) from p137 to p228
 
 ## Configuration
-     
 ```java
     int number_of_node_upper_bound = 60; // the max number of nodes for each graph
     int number_of_node_lower_bound = 3; // the min number of nodes for each graph
@@ -27,6 +26,8 @@
     // The output directory (end with "/") for jimple file
     String output = "/Users/yiwu/Documents/Senior/SE/soot/src/data/reaching/";
 ```
+
+- Because this is intra-procedure static data-flow analysis, we generate a graph for each method. As a result, most graphes are not large. About 56% of graphs has less than 20 nodes and about 94% of graphs with less than 40 nodes.Thus we have `number_of_node_lower_bound` and `number_of_node_lower_bound` to limit the node range and discard very few graph with large number of nodes. You can `run count.py` to get the distribution of the dataset.
 ## Open-source Java Project
 I used the following java project to generate data:
 - [jfreechart](https://github.com/jfree/jfreechart)

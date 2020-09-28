@@ -14,7 +14,7 @@ with open("/Users/yiwu/Documents/Senior/SE/soot/src/data/reaching_def_data.jsonl
         for i in count:
             if max_node_id_of_one_graph <= i:
                 count[i]+=1
-                break
+                # break
 print(count)
 print(sum)
 for i in count:
